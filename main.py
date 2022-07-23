@@ -1,5 +1,5 @@
 import tkinter 
-from tkinter import Label
+from tkinter import Label, Button, ttk
 from PIL import Image, ImageTk
 # from tkinter import *
 # from tkinter import ttk
@@ -22,12 +22,14 @@ if __name__ == "__main__" :
     info = Label(interfaz,bd = 0, text = 'Grupo: 3CV16, TCyS', font=("Verdana",12), bg = bgcolor, fg='#FFFFFF')
     info.place(x = 150, y = 17)
 
+    # Boton de accion
     img = Image.open('img/microfono.png')
     img = img.resize((50, 50), Image.ANTIALIAS) 
     img = ImageTk.PhotoImage(img)
-    botonGrabar = tkinter.Button(interfaz, image=img, text="Grabar", compound="top", command=iniciar, bg='#480000', fg='#FFFFFF')
+    botonGrabar = Button(interfaz, image=img, text="Grabar", compound="top", command=iniciar, bg='#480000', fg='#FFFFFF')
     botonGrabar.place(x = 200, y = 50)
 
+    # Logos del politecnico
     ipn = Image.open('img/ipn.png')
     ipn = ipn.resize((120, 85), Image.ANTIALIAS) 
     ipn = ImageTk.PhotoImage(ipn)
@@ -41,6 +43,17 @@ if __name__ == "__main__" :
     escomLogo = Label(interfaz, image = escom, bg='#FFFFFF', fg='#FFFFFF')
     # ipnLogo.config(bg='systemTransparent')
     escomLogo.place(x = 370, y = 17)
-    
+
+    #Barra de progreso de la accion al accionar el boton
+    pb = ttk.Progressbar(interfaz, orient="horizontal", length=200)
+    pb.place(x = 140, y = 135)
+    pb.config(mode="determinate", maximum=100, value = 0)
+    pb.step(100)
+    # pb.pack()
+
+    label = Label(interfaz, text = 'Letra Encontrada:', font=("Verdana",12), bg='#480000', fg='#FFFFFF')
+    label.place(x = 160, y = 175)
+    # label.pack()
+
     interfaz.mainloop()
 
