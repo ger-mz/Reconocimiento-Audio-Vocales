@@ -1,14 +1,24 @@
 import tkinter 
 from tkinter import Label, Button, ttk
 from PIL import Image, ImageTk
-# from tkinter import *
-# from tkinter import ttk
+from grabadora import grabar
+from time import sleep
+import threading
+
+# Variables globales
+global pb
 
 # Bacdkground color 
 bgcolor= '#800040'
 
+def barraProgreso() :
+    pb.start(2)
+    sleep(1.0)
+    pb.stop()
+
 def iniciar() :
-    print("iniciar")
+    t1 = threading.Thread(name = "barraProgreso", target = barraProgreso)
+    t1.start()
 
 
 if __name__ == "__main__" :
