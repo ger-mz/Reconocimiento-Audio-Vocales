@@ -7,10 +7,17 @@ import threading
 
 # Variables globales
 global pb
+global interfaz
+
 
 # Bacdkground color 
 bgcolor= '#800040'
 
+# funcion para identificar la vocal en una grabacion usando formantes
+def identificador() :
+    grabar()
+
+# accion de la barra de progreso
 def barraProgreso() :
     pb.start(2)
     sleep(1.0)
@@ -18,8 +25,9 @@ def barraProgreso() :
 
 def iniciar() :
     t1 = threading.Thread(name = "barraProgreso", target = barraProgreso)
+    t2 = threading.Thread(name = "identificador", target = identificador)
     t1.start()
-
+    t2.start()
 
 if __name__ == "__main__" :
     # Iniciando la interfaz
@@ -66,4 +74,3 @@ if __name__ == "__main__" :
     # label.pack()
 
     interfaz.mainloop()
-
