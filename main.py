@@ -2,14 +2,13 @@ import tkinter
 from formantes import getFormantes, identificar, preProcesado
 from tkinter import Label, Button, ttk
 from PIL import Image, ImageTk
+from threading import Thread
 from grabadora import grabar
 from time import sleep
-import threading
 
 # Variables globales
 global pb
 global interfaz
-
 
 # Bacdkground color 
 bgcolor= '#800040'
@@ -31,8 +30,8 @@ def barraProgreso() :
     pb.stop()
 
 def iniciar() :
-    t1 = threading.Thread(name = "barraProgreso", target = barraProgreso)
-    t2 = threading.Thread(name = "identificador", target = identificador)
+    t1 = Thread(name = "barraProgreso", target = barraProgreso)
+    t2 = Thread(name = "identificador", target = identificador)
     t1.start()
     t2.start()
 
@@ -59,14 +58,12 @@ if __name__ == "__main__" :
     ipn = ipn.resize((120, 85), Image.Resampling.LANCZOS) 
     ipn = ImageTk.PhotoImage(ipn)
     ipnLogo = Label(interfaz, image = ipn, bg='#FFFFFF', fg='#FFFFFF')
-    # ipnLogo.config(bg='systemTransparent')
     ipnLogo.place(x = 0, y = 17)
 
     escom = Image.open('img/escom.png')
     escom = escom.resize((85, 85), Image.Resampling.LANCZOS) 
     escom = ImageTk.PhotoImage(escom)
     escomLogo = Label(interfaz, image = escom, bg='#FFFFFF', fg='#FFFFFF')
-    # ipnLogo.config(bg='systemTransparent')
     escomLogo.place(x = 370, y = 17)
 
     #Barra de progreso de la accion al accionar el boton
@@ -74,10 +71,8 @@ if __name__ == "__main__" :
     pb.place(x = 140, y = 135)
     pb.config(mode="determinate", maximum=100, value = 0)
     pb.step(100)
-    # pb.pack()
 
     label = Label(interfaz, text = 'Letra Encontrada:', font=("Verdana",12), bg='#480000', fg='#FFFFFF')
     label.place(x = 160, y = 175)
-    # label.pack()
 
     interfaz.mainloop()
