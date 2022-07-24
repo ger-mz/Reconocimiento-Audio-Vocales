@@ -49,21 +49,21 @@ if __name__ == "__main__" :
 
     # Boton de accion
     img = Image.open('img/microfono.png')
-    img = img.resize((50, 50), Image.ANTIALIAS) 
+    img = img.resize((50, 50), Image.Resampling.LANCZOS) 
     img = ImageTk.PhotoImage(img)
     botonGrabar = Button(interfaz, image=img, text="Grabar", compound="top", command=iniciar, bg='#480000', fg='#FFFFFF')
     botonGrabar.place(x = 200, y = 50)
 
     # Logos del politecnico
     ipn = Image.open('img/ipn.png')
-    ipn = ipn.resize((120, 85), Image.ANTIALIAS) 
+    ipn = ipn.resize((120, 85), Image.Resampling.LANCZOS) 
     ipn = ImageTk.PhotoImage(ipn)
     ipnLogo = Label(interfaz, image = ipn, bg='#FFFFFF', fg='#FFFFFF')
     # ipnLogo.config(bg='systemTransparent')
     ipnLogo.place(x = 0, y = 17)
 
     escom = Image.open('img/escom.png')
-    escom = escom.resize((85, 85), Image.ANTIALIAS) 
+    escom = escom.resize((85, 85), Image.Resampling.LANCZOS) 
     escom = ImageTk.PhotoImage(escom)
     escomLogo = Label(interfaz, image = escom, bg='#FFFFFF', fg='#FFFFFF')
     # ipnLogo.config(bg='systemTransparent')
