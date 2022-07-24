@@ -1,4 +1,5 @@
 import tkinter 
+from formantes import getFormantes, identificar, preProcesado
 from tkinter import Label, Button, ttk
 from PIL import Image, ImageTk
 from grabadora import grabar
@@ -16,6 +17,12 @@ bgcolor= '#800040'
 # funcion para identificar la vocal en una grabacion usando formantes
 def identificador() :
     grabar()
+    promediosH = preProcesado()
+    formante = getFormantes("audio/audio.wav")
+    print("F1: ", formante[0])
+    print("F2: ", formante[1])
+    vocal = str(identificar(formante, promediosH)) 
+    print("Vocal: "+vocal)
 
 # accion de la barra de progreso
 def barraProgreso() :
