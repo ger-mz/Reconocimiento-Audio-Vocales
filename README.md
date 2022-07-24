@@ -1,6 +1,7 @@
 ## Reconocimiento-Audio-Vocales
+Programa para identificar una vocal en un audio
 
-### Instalaciones
+### Instalaciones para windows
 * python -m pip install --upgrade pip
 * pip install Pillow
 * pip install sounddevice
