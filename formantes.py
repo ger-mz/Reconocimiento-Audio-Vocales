@@ -2,6 +2,7 @@ import parselmouth
 import statistics
 from parselmouth import praat
 from scipy.spatial import distance
+from numpy import isnan
 
 # funcion para identificar los formates de un archivo de audio
 def getFormantes(testfile):
@@ -60,3 +61,34 @@ def identificar(formante, promedios):
                     ans = 'U'
                 aux = distancia
     return ans
+
+# Preprocesado de los audios pre grabados
+def preProcesado():
+    carpetas = ['AH','EH','IH','OH','UH']
+    promedios1 = {'AH':[], 'EH':[], 'IH':[],'OH':[], 'UH':[]}
+    # promedios2 = {'AH':0, 'EH':0, 'IH':0,'OH':0, 'UH':0}
+    for carpeta in carpetas:
+        formantesComp = []
+        # formantes1 = []
+        # formantes2 = []
+        for i in range(1,6,1):
+            path = 'audio/'+carpeta+'/'+carpeta+'_'+str(i)+'.wav'
+            aux = getFormantes(path)
+            if isnan(aux[0]) or isnan(aux[1]):
+                print('carpeta: '+carpeta+' range: '+str(i))
+                print("aux: " + str(aux[0]))
+                print("is nan")
+                aux[0]=0
+                aux[1]=0
+            formantesComp.append((aux[0], aux[1]))
+            # formantes1.append(aux[0])
+            # formantes2.append(aux[1])
+        # promedios1[carpeta] = (statistics.mean(formantes1), statistics.mean(formantes2))
+        promedios1[carpeta] = formantesComp
+        # promedios2[carpeta] = (statistics.mean(formantes2))
+    print("Promedios: ")
+    print(promedios1)
+    print('')
+    return promedios1
+
+# preProcesado()
