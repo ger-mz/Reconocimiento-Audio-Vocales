@@ -1,6 +1,7 @@
 import parselmouth 
 import statistics
 from parselmouth import praat
+from scipy.spatial import distance
 
 # funcion para identificar los formates de un archivo de audio
 def getFormantes(testfile):
@@ -35,3 +36,27 @@ def getFormantes(testfile):
         
     formantes = [formante1, formante2]
     return formantes
+
+def identificar(formante, promedios):
+    a = (formante[0], formante[1])
+    if formante[0] == 0 and formante[1] == 0:
+        return ' '
+    ans = ''
+    aux = 1000000
+    for val in promedios:
+        for punto in promedios[val]:
+            distancia = distance.euclidean(a, punto)
+            print("val: ",val,"punto: ", punto," distancia: ", distancia)
+            if distancia < aux:
+                if val == 'AH':
+                    ans = 'A'
+                elif val == 'EH':
+                    ans = 'E'
+                elif val == 'IH':
+                    ans = 'I'
+                elif val == 'OH':
+                    ans = 'O'
+                elif val == 'UH':
+                    ans = 'U'
+                aux = distancia
+    return ans
