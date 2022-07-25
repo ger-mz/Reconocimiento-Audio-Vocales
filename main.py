@@ -11,7 +11,7 @@ global pb
 global interfaz
 
 # Bacdkground color 
-bgcolor= '#800040'
+bgcolor = '#800040'
 
 # funcion para identificar la vocal en una grabacion usando formantes
 def identificador() :
@@ -69,8 +69,8 @@ if __name__ == "__main__" :
     #Barra de progreso de la accion al accionar el boton
     pb = ttk.Progressbar(interfaz, orient="horizontal", length=200)
     pb.place(x = 140, y = 135)
-    pb.config(mode="determinate", maximum=100, value = 0)
-    pb.step(100)
+    pb.config(mode="determinate", maximum=65, value = 0)
+    pb.step(65)
 
     label = Label(interfaz, text = 'Letra Encontrada:', font=("Verdana",12), bg='#480000', fg='#FFFFFF')
     label.place(x = 160, y = 175)
