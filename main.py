@@ -1,6 +1,5 @@
-import tkinter 
 from formantes import getFormantes, identificar, preProcesado
-from tkinter import Label, Button, ttk
+from tkinter import Tk, StringVar, Label, Button, ttk
 from PIL import Image, ImageTk
 from threading import Thread
 from grabadora import grabar
@@ -22,6 +21,12 @@ def identificador() :
     print("F2: ", formante[1])
     vocal = str(identificar(formante, promediosH)) 
     print("Vocal: "+vocal)
+    resultado = StringVar()
+    vocalEncontrada = Label(interfaz, textvariable = resultado, font=("Verdana",70), bg=bgcolor, fg='#FFFFFF')
+    vocalEncontrada.place(x = 195, y = 200)
+
+    resultado.set('\t')
+    resultado.set(vocal)
 
 # accion de la barra de progreso
 def barraProgreso() :
@@ -37,7 +42,7 @@ def iniciar() :
 
 if __name__ == "__main__" :
     # Iniciando la interfaz
-    interfaz = tkinter.Tk()
+    interfaz = Tk()
     # Configuracion de la ventana
     interfaz.geometry('480x470') 
     interfaz.config(bd = 10, bg = bgcolor)
