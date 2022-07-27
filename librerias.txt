@@ -1,0 +1,6 @@
+Pillow
+sounddevice
+scipy
+praat-parselmouth
+librosa
+matplotlib
