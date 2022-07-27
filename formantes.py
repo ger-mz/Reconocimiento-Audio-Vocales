@@ -45,32 +45,30 @@ def identificar(formante, promedios):
     ans = ''
     aux = 1000000
     for val in promedios:
-        for punto in promedios[val]:
-            distancia = distance.euclidean(a, punto)
-            print("val: ",val,"punto: ", punto," distancia: ", distancia)
-            if distancia < aux:
-                if val == 'AH':
-                    ans = 'A'
-                elif val == 'EH':
-                    ans = 'E'
-                elif val == 'IH':
-                    ans = 'I'
-                elif val == 'OH':
-                    ans = 'O'
-                elif val == 'UH':
-                    ans = 'U'
-                aux = distancia
+        punto = promedios[val]
+        distancia = distance.euclidean(a, punto)
+        print("val: ",val,"punto: ", punto," distancia: ", distancia)
+        if distancia < aux:
+            if val == 'AH':
+                ans = 'A'
+            elif val == 'EH':
+                ans = 'E'
+            elif val == 'IH':
+                ans = 'I'
+            elif val == 'OH':
+                ans = 'O'
+            elif val == 'UH':
+                ans = 'U'
+            aux = distancia
     return ans
 
 # Preprocesado de los audios pre grabados
 def preProcesado():
     carpetas = ['AH','EH','IH','OH','UH']
-    promedios1 = {'AH':[], 'EH':[], 'IH':[],'OH':[], 'UH':[]}
-    # promedios2 = {'AH':0, 'EH':0, 'IH':0,'OH':0, 'UH':0}
+    promedios = {'AH':[], 'EH':[], 'IH':[],'OH':[], 'UH':[]}
     for carpeta in carpetas:
-        formantesComp = []
-        # formantes1 = []
-        # formantes2 = []
+        promedioAux1 = []
+        promedioAux2 = []
         for i in range(1,6,1):
             path = 'audio/'+carpeta+'/'+carpeta+'_'+str(i)+'.wav'
             aux = getFormantes(path)
@@ -80,15 +78,10 @@ def preProcesado():
                 print("is nan")
                 aux[0]=0
                 aux[1]=0
-            formantesComp.append((aux[0], aux[1]))
-            # formantes1.append(aux[0])
-            # formantes2.append(aux[1])
-        # promedios1[carpeta] = (statistics.mean(formantes1), statistics.mean(formantes2))
-        promedios1[carpeta] = formantesComp
-        # promedios2[carpeta] = (statistics.mean(formantes2))
+            promedioAux1.append(aux[0])
+            promedioAux2.append(aux[1])
+        promedios[carpeta] = (statistics.mean(promedioAux1), statistics.mean(promedioAux2))
     print("Promedios: ")
-    print(promedios1)
+    print(promedios)
     print('')
-    return promedios1
-
-# preProcesado()
+    return promedios
