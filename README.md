@@ -1,5 +1,6 @@
 ## Reconocimiento-Audio-Vocales
-Programa para identificar una vocal en un audio
+Programa para identificar una vocal en un audio.  
+Teoria de Comunicaciones y Señales (TCyS)
 
 ### Instalaciones para windows
 * python -m pip install --upgrade pip

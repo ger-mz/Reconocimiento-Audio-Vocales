@@ -61,7 +61,7 @@ if __name__ == "__main__" :
     interfaz.config(bd = 10, bg = bgcolor)
     interfaz.title('Proyecto Vocales')
     # Informacion
-    info = Label(interfaz,bd = 0, text = 'Grupo: 3CV16, TCyS', font=("Verdana",12), bg = bgcolor, fg='#FFFFFF')
+    info = Label(interfaz,bd = 0, text = '          TCyS', font=("Verdana",12), bg = bgcolor, fg='#FFFFFF')
     info.place(x = 150, y = 17)
 
     # Boton de accion
