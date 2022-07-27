@@ -1,5 +1,7 @@
+from graficador import graficaAudio, graficaEspectroFrecuencias
 from formantes import getFormantes, identificar, preProcesado
 from tkinter import Tk, StringVar, Label, Button, ttk
+from analisis import getAmplitudes, analizaAudio
 from PIL import Image, ImageTk
 from threading import Thread
 from grabadora import grabar
@@ -20,13 +22,24 @@ def identificador() :
     print("F1: ", formante[0])
     print("F2: ", formante[1])
     vocal = str(identificar(formante, promediosH)) 
-    print("Vocal: "+vocal)
+    print("Vocal: "+vocal) 
     resultado = StringVar()
     vocalEncontrada = Label(interfaz, textvariable = resultado, font=("Verdana",70), bg=bgcolor, fg='#FFFFFF')
     vocalEncontrada.place(x = 195, y = 200)
 
     resultado.set('\t')
     resultado.set(vocal)
+
+    # Funciones de analisis de audio
+    analisis = analizaAudio("audio/audio.wav")
+    amp = getAmplitudes(analisis['muestras'])
+
+    # Botones de graficas
+    b1 = Button(interfaz,bg='#480000', fg='#FFFFFF',cursor="hand1",text="Grafica de Audio",command=lambda: graficaAudio(analisis['muestras'], analisis['tasa_muestreo']))
+    b1.place(x = 180, y = 370)
+    b2 = Button(interfaz,bg='#480000', fg='#FFFFFF',cursor="hand1",text="Grafica de Espectro de Frecuencia",command=lambda: graficaEspectroFrecuencias(amp, int(analisis['tasa_muestreo'])))
+    b2.place(x = 135, y = 405)
+
 
 # accion de la barra de progreso
 def barraProgreso() :
